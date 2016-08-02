@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="org.single.mapper.UserMapper">
+	<select id="login" resultType="UserVO">
+		select email, password 
+		  from sl_user
+		 where email = #{email} and password = #{password}
+	</select>
+	
+	<update id="keepLogin">
+		update sl_user set sessionKey=#{sessionEmail}, sessionLimit=#{next} where email=#{email}
+	</update>
+	
+	<select id="checkUserWithSessionKey" resultType="UserVO">
+		select *
+		  from sl_user
+		 where sessionKey = #{value} and sessionLimit > sysdate
+	</select>
+	
+	<select id="checkEmail" resultType="string">
+		select email
+		  from sl_user
+		 where email = #{email} 
+	</select>
+</mapper>

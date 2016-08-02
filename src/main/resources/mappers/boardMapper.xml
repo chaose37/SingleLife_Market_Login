@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.single.mapper.BoardMapper">
+
+	<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 't'.toString()">
+				and title like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'c'.toString()">
+				and content like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'w'.toString()">
+				and writer like '%'||#{keyword}||'%'
+			</if>
+			<if test="searchType == 'tc'.toString()">
+				and (title like '%'||#{keyword}||'%' OR content like
+				'%'||#{keyword}||'%')
+			</if>
+			<if test="searchType == 'cw'.toString()">
+				and (content like '%'||#{keyword}||'%' OR writer like
+				'%'||#{keyword}||'%')
+			</if>
+			<if test="searchType == 'tcw'.toString()">
+				and (title like '%'||#{keyword}||'%' OR content like
+				'%'||#{keyword}||'%' OR writer like '%'||#{keyword}||'%')
+			</if>
+		</if>
+	</sql>
+
+	<select id="getAttach" resultType="string">
+		select fullname
+		from sl_attach
+		where bno=#{bno}
+		order by regdate
+	</select>
+
+	<select id="listSearch" resultType="boardVO">
+	<![CDATA[
+		select bno, title, content, writer, viewcnt, regdate, updatedate,replycnt
+		  from ( select /*+INDEX_DESC(sl_board, pk_sl_board)*/
+		  				rownum rnum, bno, title, content, writer, viewcnt, regdate, updatedate, replycnt
+		  		   from sl_board
+		  		  where 1=1
+	]]>
+		<include refid="search"></include>
+			<![CDATA[
+				and rownum <= #{page} * #{perPageNum} and bno > 0)
+		where rnum > (#{page} -1) * #{perPageNum}
+			]]>
+	</select>
+
+	<select id="listSearchCount" resultType="int">
+	<![CDATA[
+	 select count(bno)
+	   from sl_board
+	  where 1=1
+	]]>
+		<include refid="search"></include>
+		<![CDATA[
+			and bno>0
+		]]>
+	</select>
+
+	<select id="listAll" resultType="boardVO">
+		<![CDATA[
+		select bno, title, content, writer, regdate
+		  from ( select 
+		  			/*+INDEX_DESC(sl_board, pk_sl_board)*/
+		  			rownum m, bno, title, content, writer, regdate
+		  		   from sl_board
+		  		  where rownum <= #{page} * {perPageNum} and bno > 0 )
+		 where m > (#{page} - 1) * #{perPageNum}
+		]]>
+	</select>
+
+	<insert id="create" parameterType="boardVO">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="int">
+			select seq_sl_board.nextVal from dual
+		</selectKey>
+		insert into sl_board (bno, title, writer, content)
+		values(#{bno}, #{title}, #{writer}, #{content})
+	</insert>
+
+	<select id="read" parameterType="integer" resultType="boardVO">
+		select bno, viewcnt, title, writer, content, replycnt
+		from sl_board
+		where bno=#{bno}
+	</select>
+	<select id="readAttach" parameterType="int" resultType="string">
+		select fullName
+		from sl_attach
+		where bno = #{bno}
+	</select>
+
+	<update id="update" parameterType="boardVO">
+		update sl_board set title=#{title}, content=#{content} where bno=#{bno}
+	</update>
+
+	<update id="addViewCnt" parameterType="integer">
+		update sl_board set viewcnt=viewcnt+1 where bno=#{bno}
+	</update>
+
+	<delete id="delete" parameterType="integer">
+		delete from sl_board where bno=#{bno}
+	</delete>
+
+	<select id="listPage" resultType="boardVO">
+   		<![CDATA[
+		select bno, title, content, writer, viewcnt, regdate, updatedate
+		  from (select rownum rnum ,b.* 
+   	      		  from   (select *
+   		           	        from sl_board
+   		           	        where rownum <= 20
+   		                   order by bno desc) b
+   		        ) 
+   		  where rnum >= 0
+   		  ]]>
+	</select>
+
+	<select id="listCriteria" resultType="boardVO">
+   		<![CDATA[
+		select bno, title, content, writer, viewcnt, regdate, updatedate
+		  from (select /*+INDEX_DESC(sl_board, pk_sl_board)*/ 
+					   rownum rnum ,bno, title, content, writer, viewcnt, regdate, updatedate
+   	      		  from sl_board
+   	      		 where 1=1 
+   	      		   and rownum <= #{page} * #{perPageNum} 
+   	      		   and bno > 0 )
+   		  where rnum > ( #{page}-1 )  *  #{ perPageNum }
+   		  ]]>
+	</select>
+
+	<select id="countPaging" resultType="int">
+   <![CDATA[
+   	select count(bno)
+   	  from sl_board
+   	 where bno > 0
+   ]]>
+	</select>
+
+	<insert id="addAttach" parameterType="fileVO">
+		insert into sl_attach(fullName, bno) values (#{fullname}, #{bno})
+	</insert>
+
+	<delete id="deleteAttach">
+		delete from sl_attach where bno=#{bno}
+	</delete>
+
+	<insert id="replaceAttach">
+		insert into sl_attach(fullName, bno) values(#{fullName}, #{bno})
+	</insert>
+
+	<insert id="account" parameterType="userVO">
+		insert into sl_user(address, birthday, email, gender, password, postcode, uuid)
+		values (#{address, jdbcType=VARCHAR}, #{birthday, jdbcType=VARCHAR},
+		#{email, jdbcType=VARCHAR}, #{gender, jdbcType=VARCHAR}, #{password,
+		jdbcType=VARCHAR}, #{postcode, jdbcType=VARCHAR},#{uuid, jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="login" resultType="userVO">
+		select email, password, chk
+		  from sl_user
+		 where email = #{email} and password = #{password}
+	</select>
+	
+	<select id="selectChk" resultType="userVO">
+		select *
+		  from sl_user
+		 where email = #{email} and password = #{password} and uuid = #{uuid}
+	</select>
+	
+	<update id="changeChk">
+		update sl_user
+		   set chk = #{chk}
+		 where email = #{email} and password = #{password} and uuid = #{uuid}
+	</update>
+	
+	<select id="loginAjax" resultType="userVO" parameterType="userVO">
+		select * 
+		  from sl_user
+		 where email = #{email}
+	</select>
+	
+	<update id="updateLogin" parameterType="userVO">
+		update sl_user
+		   set birthday = #{birthday}, password = #{password}, address = #{address}, postcode = #{postcode} 
+		 where email = #{email}
+	</update>
+</mapper>
