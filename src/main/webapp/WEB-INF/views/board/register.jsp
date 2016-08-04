@@ -107,10 +107,11 @@ $(".fileDrop").on("dragenter dragover", function(event){
 
 $(".fileDrop").on("drop", function(event){
 	event.preventDefault();
-	
+	console.dir(event)
 	var files = event.originalEvent.dataTransfer.files;
 	
 	var file = files[0];
+	console.dir(files)
 	var formData = new FormData();
 	
 	formData.append("file", file);	

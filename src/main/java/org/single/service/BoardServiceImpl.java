@@ -11,6 +11,7 @@ import org.single.domain.UserVO;
 import org.single.persistence.BoardDAO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class BoardServiceImpl implements BoardService{
@@ -105,7 +106,6 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void account(UserVO userVO) throws Exception {
 		dao.account(userVO);
-		
 	}
 
 	@Override

@@ -155,14 +155,14 @@
 	</insert>
 
 	<insert id="account" parameterType="userVO">
-		insert into sl_user(address, birthday, email, gender, password, postcode, uuid)
+		insert into sl_user(address, birthday, email, password, postcode, uuid, profilepath)
 		values (#{address, jdbcType=VARCHAR}, #{birthday, jdbcType=VARCHAR},
-		#{email, jdbcType=VARCHAR}, #{gender, jdbcType=VARCHAR}, #{password,
-		jdbcType=VARCHAR}, #{postcode, jdbcType=VARCHAR},#{uuid, jdbcType=VARCHAR})
+		#{email, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR},
+		#{postcode, jdbcType=VARCHAR},#{uuid, jdbcType=VARCHAR}, #{profilepath, jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="login" resultType="userVO">
-		select email, password, chk
+		select email, password, chk, profilepath
 		  from sl_user
 		 where email = #{email} and password = #{password}
 	</select>
@@ -187,7 +187,7 @@
 	
 	<update id="updateLogin" parameterType="userVO">
 		update sl_user
-		   set birthday = #{birthday}, password = #{password}, address = #{address}, postcode = #{postcode} 
+		   set birthday = #{birthday}, password = #{password}, address = #{address}, postcode = #{postcode}, profilepath = #{profilepath} 
 		 where email = #{email}
 	</update>
 </mapper>

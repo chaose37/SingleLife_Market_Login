@@ -5,7 +5,7 @@
    
 <mapper namespace="org.single.mapper.UserMapper">
 	<select id="login" resultType="UserVO">
-		select email, password 
+		select email, password, profilepath
 		  from sl_user
 		 where email = #{email} and password = #{password}
 	</select>

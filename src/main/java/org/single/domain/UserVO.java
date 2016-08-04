@@ -10,7 +10,16 @@ public class UserVO {
 	private String chk;
 	private String uuid;
 	private String id;
+	private String profilepath;
+	
 
+	
+	public String getProfilepath() {
+		return profilepath;
+	}
+	public void setProfilepath(String profilepath) {
+		this.profilepath = profilepath;
+	}
 	public String getId() {
 		return id;
 	}
@@ -65,10 +74,10 @@ public class UserVO {
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
 	}
-
 	@Override
 	public String toString() {
 		return "UserVO [email=" + email + ", password=" + password + ", gender=" + gender + ", birthday=" + birthday
-				+ ", postcode=" + postcode + ", address=" + address + ", chk=" + chk + ", uuid=" + uuid + "]";
+				+ ", postcode=" + postcode + ", address=" + address + ", chk=" + chk + ", uuid=" + uuid + ", id=" + id
+				+ ", profilepath=" + profilepath + "]";
 	}
 }

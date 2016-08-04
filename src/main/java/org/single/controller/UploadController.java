@@ -3,6 +3,7 @@ package org.single.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Iterator;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -19,11 +20,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 @Controller
@@ -60,9 +63,9 @@ public class UploadController {
 	}
 	//이미지 업로드
 	@RequestMapping(value="/uploadAjax", method = RequestMethod.GET)
-	public void uploadAjax(){
-	}
+	public void uploadAjax(){}
 	
+	@CrossOrigin(origins="*", maxAge = 3600)
 	@ResponseBody
 	@RequestMapping(value="/uploadAjax", method=RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception{
@@ -71,6 +74,18 @@ public class UploadController {
 		logger.info("contentType: " + file.getContentType());
 		
 		return new ResponseEntity<>(UploadFileUtils.uploadFile(uploadPath,  file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
+	}
+	
+	@CrossOrigin(origins="*", maxAge = 3600)
+	@ResponseBody
+	@RequestMapping(value="/uploadProfile", method=RequestMethod.POST, produces = "text/plain;charset=UTF-8")
+	public ResponseEntity<String> uploadProfile(MultipartFile file) throws Exception{
+
+		logger.info("originalName: " + file.getOriginalFilename());
+		logger.info("size: " + file.getSize());
+		logger.info("contentType: " + file.getContentType());
+		
+		return new ResponseEntity<>(UploadFileUtils.uploadFile("C:/zzz/profile",  file.getOriginalFilename(), file.getBytes()), HttpStatus.CREATED);
 	}
 	//리스트 대문 사진 보여줌
 	@ResponseBody
@@ -106,6 +121,46 @@ public class UploadController {
 			in.close();
 		}
 		
+		}
+		catch(Exception e)
+		{
+			System.out.println(11);
+		}
+		return entity;
+	}
+	@ResponseBody
+	@RequestMapping("/displayProfile")
+	public ResponseEntity<byte[]> displayProfile(String fileName) throws Exception{
+		ResponseEntity<byte[]> entity = null;
+		try{
+			InputStream in = null;
+			
+			
+			logger.info("FILE NAME : " + fileName);
+			
+			try{
+				String formatName = fileName.substring(fileName.lastIndexOf(".")+1);
+				MediaType mType = MediaUtils.getMediaType(formatName);
+				HttpHeaders headers = new HttpHeaders();
+				in = new FileInputStream("C:/zzz/profile"+fileName);
+				
+				if(mType != null){
+					headers.setContentType(mType);
+				}else{
+					fileName = fileName.substring(fileName.indexOf("_")+1);
+					headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+					headers.add("Content-Disposition", "attachment; filename=\""+ 
+							new String(fileName.getBytes("UTF-8"),"ISO-8859-1")+"\"");
+				}
+				
+				entity = new ResponseEntity<byte[]>(IOUtils.toByteArray(in), headers, HttpStatus.CREATED);
+			}catch(Exception e){
+				e.printStackTrace();
+				entity = new ResponseEntity<byte[]>(HttpStatus.BAD_REQUEST);
+			}finally{
+				in.close();
+			}
+			
 		}
 		catch(Exception e)
 		{
