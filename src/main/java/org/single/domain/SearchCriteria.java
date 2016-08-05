@@ -7,7 +7,7 @@ public class SearchCriteria{
 	private String keyword;
 	public SearchCriteria(){
 		this.page = 1;
-		this.perPageNum = 12;
+		this.perPageNum = 20;
 	}
 	
 	public void setPage(int page){
@@ -20,7 +20,7 @@ public class SearchCriteria{
 	
 	public void setPerPageNum(int perPageNum){
 		if(perPageNum <= 0 || perPageNum > 100){
-			this.perPageNum = 12;
+			this.perPageNum = 20;
 			return;
 		}
 		

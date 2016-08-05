@@ -1,13 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<%@ include file="../include/header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Hydrogen &mdash; A free HTML5 Template by FREEHTML5.CO</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
+	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FREEHTML5.CO" />
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
 
+	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/res/favicon.ico">
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/animate.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/icomoon.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/magnific-popup.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/salvattore.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/style.css">
+	<script src="${pageContext.request.contextPath}/resources/res/js/modernizr-2.6.2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/res/js/respond.min.js"></script>
 <style>
 .fileDrop {
   width: 80%;
@@ -17,29 +40,29 @@
   margin: auto;
   
 }
-	.popup{
-		position: absolute;
-	}
-	.back{
-		background-color: gray;
-		opacity : 0.5;
-		width: 100%;
-		height: 300%;
-		overflow: hidden;
-		z-index: 1101;
-	}
-	.front{
-		z-index: 1110;
-		opacity : 1;
-		border : 1px;
-		margin :auto;
-	}
-	.show{
-		position: relative;
-		max-width: 1200px;
-		max-height: 800px;
-		overflow: auto;
-	}
+.popup{
+	position: absolute;
+}
+.back{
+	background-color: gray;
+	opacity : 0.5;
+	width: 100%;
+	height: 300%;
+	overflow: hidden;
+	z-index: 1101;
+}
+.front{
+	z-index: 1110;
+	opacity : 1;
+	border : 1px;
+	margin :auto;
+}
+.show{
+	position: relative;
+	max-width: 1200px;
+	max-height: 800px;
+	overflow: auto;
+}
 </style>
 </head>
 <body>

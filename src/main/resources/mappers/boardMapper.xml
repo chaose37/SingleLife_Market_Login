@@ -181,7 +181,7 @@
 	</update>
 	
 	<select id="loginAjax" resultType="userVO" parameterType="userVO">
-		select * 
+		select *
 		  from sl_user
 		 where email = #{email}
 	</select>

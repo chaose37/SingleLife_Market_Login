@@ -152,6 +152,7 @@ public class SearchBoardController {
 	@RequestMapping(value="loginAjax", method=RequestMethod.POST)
 	public UserVO loginAjax(UserVO userVO) throws Exception {
 		UserVO result = boardService.loginAjax(userVO);
+		System.out.println("result Mypage : " + userVO.toString());
 		return result;
 	}
 	

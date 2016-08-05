@@ -90,6 +90,6 @@ public class UserVO {
 	public String toString() {
 		return "UserVO [email=" + email + ", password=" + password + ", gender=" + gender + ", birthday=" + birthday
 				+ ", postcode=" + postcode + ", address=" + address + ", chk=" + chk + ", uuid=" + uuid + ", id=" + id
-				+ ", profilepath=" + profilepath + "]";
+				+ ", profilepath=" + profilepath + ", users=" + users + ", developer=" + developer + "]";
 	}
 }
