@@ -134,6 +134,7 @@ public class SearchBoardController {
 	@RequestMapping(value="login", method=RequestMethod.POST)
 	public UserVO login(UserVO userVO) throws Exception {
 		UserVO vo = boardService.login(userVO);
+		System.out.println("login : " + userVO.toString());
 		return vo;
 	}
 	

@@ -158,7 +158,8 @@
 		insert into sl_user(address, birthday, email, password, postcode, uuid, profilepath)
 		values (#{address, jdbcType=VARCHAR}, #{birthday, jdbcType=VARCHAR},
 		#{email, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR},
-		#{postcode, jdbcType=VARCHAR},#{uuid, jdbcType=VARCHAR}, #{profilepath, jdbcType=VARCHAR})
+		#{postcode, jdbcType=VARCHAR},#{uuid, jdbcType=VARCHAR}, #{profilepath, jdbcType=VARCHAR}
+		, #{users, jdbcType=VARCHAR}, #{developer, jdbcType=VARCHAR})
 	</insert>
 	
 	<select id="login" resultType="userVO">

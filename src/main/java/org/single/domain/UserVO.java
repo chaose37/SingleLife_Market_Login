@@ -11,9 +11,21 @@ public class UserVO {
 	private String uuid;
 	private String id;
 	private String profilepath;
+	private String users;
+	private String developer;
 	
-
-	
+	public String getUsers() {
+		return users;
+	}
+	public void setUsers(String users) {
+		this.users = users;
+	}
+	public String getDeveloper() {
+		return developer;
+	}
+	public void setDeveloper(String developer) {
+		this.developer = developer;
+	}
 	public String getProfilepath() {
 		return profilepath;
 	}
