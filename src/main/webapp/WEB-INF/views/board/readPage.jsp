@@ -2,11 +2,13 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
 <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Hydrogen &mdash; A free HTML5 Template by FREEHTML5.CO</title>
+	<title>Market</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
@@ -31,6 +33,15 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/style.css">
 	<script src="${pageContext.request.contextPath}/resources/res/js/modernizr-2.6.2.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/res/js/respond.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/res/js/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/res/js/jquery.easing.1.3.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/res/js/bootstrap.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/res/js/jquery.waypoints.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/res/js/jquery.magnific-popup.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/res/js/salvattore.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/res/js/main.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/upload.js"></script>
+	
 <style>
 .fileDrop {
   width: 80%;
@@ -66,6 +77,35 @@
 </style>
 </head>
 <body>
+<div id="fh5co-offcanvass">
+		<a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close">Menu <i class="icon-cross"></i> </a>
+		<h1 class="fh5co-logo"><a class="navbar-brand" href="list">Market</a></h1>
+		<ul>
+			<li><a href="list">Home</a></li>
+			<li class="active"><a href="readPage">About</a></li>
+			<li><a href="pricing.html">Pricing</a></li>
+			<li><a href="register">Contact</a></li>
+		</ul>
+		<h3 class="fh5co-lead">Connect with us</h3>
+		<p class="fh5co-social-icons">
+			<a href="#"><i class="icon-twitter"></i></a>
+			<a href="#"><i class="icon-facebook"></i></a>
+			<a href="#"><i class="icon-instagram"></i></a>
+			<a href="#"><i class="icon-dribbble"></i></a>
+			<a href="#"><i class="icon-youtube"></i></a>
+		</p>
+	</div>
+	<header id="fh5co-header" role="banner">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<a href="#" class="fh5co-menu-btn js-fh5co-menu-btn">Menu <i class="icon-menu"></i></a>
+					<a class="navbar-brand" href="list">Market</a>		
+				</div>
+			</div>
+		</div>
+	</header>
+	
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<form role="form" method="post">
 		<input type='hidden' name='bno' value="${boardVO.bno }">
@@ -75,29 +115,23 @@
 		<input type='hidden' name='keyword' value="${cri.keyword }">
 	</form>
 
-	<div class="box-body">
-<!-- 		<div class="form-group"> -->
-<!-- 				<label for="exampleInputEmail1">Detail Image</label> -->
-<!-- 				<div class="fileDrop"></div> -->
-<!-- 		</div> -->
-		<div class="form-group">
-			<label for="exampleInputEmail1">조회수</label> 
-			<input type="text" name="viewCnt" class="form-control" value="${boardVO.viewcnt}" readonly="readonly">
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">제목</label> 
-			<input type="text" name="title" class="form-control" value="${boardVO.title}" readonly="readonly">
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">글쓴이</label> 
-			<input type="text" name="writer" class="form-control" value="${boardVO.writer}" readonly="readonly">
-		</div>
-		<div class="form-group">
-			<label for="exampleInputEmail1">내용</label>
-			<textarea class="form-control" rows="3" readonly="readonly">${boardVO.content}</textarea>
-		</div>
+
+	
+	<div id="fh5co-main">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2">
+					<h2 style="text-align: center">${boardVO.title}</h2> 
+					<input type="hidden" name="title" class="form-control" value="${boardVO.title}" readonly="readonly">
+					<div class="fh5co-spacer fh5co-spacer-sm"></div>
+					<p><img src="${pageContext.request.contextPath}/displayFile?fileName=${fn:substring(boardVO.files[0],0,12)}${fn:substring(boardVO.files[0],14,fn:length(boardVO.files[0]))}" alt="Free HTML5 template by FREEHTML5.co" class="img-rounded img-responsive"></p>
+					<p>조회수 : ${boardVO.viewcnt}</p>
+					<p>글쓴이 : ${boardVO.writer}</p>
+					<p>내   용 : ${boardVO.content}</p>
+				</div>
+        	</div>
+       </div>
 	</div>
-			
 	<div class = "popup back" style = "display:none;"></div>
 	<div id = "popup_front" class = "popup front" style = "display:none;">
 		<img id = "popup_img" />
@@ -110,8 +144,8 @@
 		</div>
 		<ul class="mailbox-attachments clearfix uploadedList"></ul>
 		<c:if test="${login.email == boardVO.writer}">
-		<button class = "btn btn-warning" id="modBoard" type = "submit">modify</button>
-		<button class = "btn btn-danger" id="delBoard" type = "submit">delete</button>
+			<button class = "btn btn-warning" id="modBoard" type = "submit">modify</button>
+			<button class = "btn btn-danger" id="delBoard" type = "submit">delete</button>
 		</c:if>
 		<button class = "btn btn-primary" id="listBoard" type = "submit">list</button>
 	</div>
@@ -190,9 +224,10 @@
 			$("#delBoard").on("click", function(){
 				var replycnt = $('#replycntSmall').html();
 				
-				alert(replycnt);
+				replycnt = replycnt.replace('[','');
+				replycnt = replycnt.replace(']','');
 				
-				if(replycnt>0){
+				if(replycnt > 0){
 					alert("댓글이 달린 게시물을 삭제 할 수 없습니다.");
 					return;
 				}
@@ -218,7 +253,6 @@
 			
 		});
 	</script>
-	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 	<script id="template" type="text/x-handlebars-template">
 		{{#each .}}
@@ -276,16 +310,6 @@
 		}
 		var bno = ${boardVO.bno};
 		var replyPage = 1;
-		
-// 		function getPage(pageInfo){
-			
-// 			$.getJSON(pageInfo,function(data){
-
-// 				printData(data.list,$("#repliesDiv"),$('#template'));
-// 				printPaging(data.pageMaker,$(".pagination"));
-// 			});
-// 		}
-		
 		var printPaging = function(pageMaker,target){
 			var str = "";
 			if(pageMaker.prev){
@@ -433,31 +457,7 @@
 				$("#replycntSmall").html("[ " +data.pageMaker.totalCount+"]");
 			});
 		}
-		
-		$("#removeBtn").on("click", function(){
-			var replycnt = $("replycntSmall").html();
-			
-			
-			if(replyCnt > 0){
-				alert("댓글이 달린 게시물을 삭제할 수 없습니다.")
-				return;
-			}
-			
-			var arr = [];
-			$("uploadedList li").each(function(index){
-				arr.push($(this).attr("data-src"));
-			});
-			
-			if(arr.length > 0){
-				$.post("/deleteAllFiles", {files:arr}, function(){
-				});
-			}
-			
-			formObj.attr("action", "/board/removePage");
-			formObj.submit();
-		});
-	</script>
 	
+	</script>
 </body>
 </html>
-<%@ include file="../include/footer.jsp"%>

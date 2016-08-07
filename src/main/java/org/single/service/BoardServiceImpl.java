@@ -36,7 +36,10 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public BoardVO read(Integer bno) throws Exception {
 		dao.addViewCnt(bno);
-		BoardVO vo = dao.read(bno);
+		BoardVO vo = dao.read(bno);		
+		List<String> fList = dao.getAttach(bno);
+		String[] files = fList.toArray(new String[fList.size()]);
+		vo.setFiles(files);
 		return vo;
 	}
 

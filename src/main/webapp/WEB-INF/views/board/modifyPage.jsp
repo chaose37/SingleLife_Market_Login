@@ -35,19 +35,12 @@
 	<input type='hidden' name='searchType' value="${cri.searchType}">
 	<input type='hidden' name='keyword' value="${cri.keyword}">
 
-					<div class="box-body">
-						
-<!-- 						<div class="form-group"> -->
-<!-- 							<label for="exampleInputEmail1">Detail Image</label> -->
-<!-- 						<div class="fileDrop"></div> -->
-					</div>
-
+					<div class="box-body"></div>
 						<div class="form-group">
 							<label for="exampleInputEmail1">BNO</label> <input type="text"
 								name='bno' class="form-control" value="${boardVO.bno}"
 								readonly="readonly">
 						</div>
-
 						<div class="form-group">
 							<label for="exampleInputEmail1">Title</label> <input type="text"
 								name='title' class="form-control" value="${boardVO.title}">
@@ -62,7 +55,6 @@
 								type="text" name="writer" class="form-control"
 								value="${boardVO.writer}">
 						</div>
-						
 						<div class="form-group">
 							<label for="exampleInputEmail1">Detail Image</label>
 						<div class="fileDrop"></div> 
@@ -83,20 +75,25 @@
 
 	</div>
 </form>
+<script src="${pageContext.request.contextPath}/resources/res/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/jquery.easing.1.3.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/jquery.waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/salvattore.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/main.js"></script>
 
-<script type="text/javascript" src="/resources/js/upload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/upload.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
 
 <script id="template" type="text/x-handlebars-template">
 <li>
-  <span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
-  <div class="mailbox-attachment-info">
-	<a href="{{getLink}}" class="mailbox-attachment-name">{{fileName}}</a>
-	<a href="{{fullName}}" 
-     class="btn btn-default btn-xs pull-right delbtn"><i class="fa fa-fw fa-remove"></i></a>
-	</span>
-  </div>
-</li>                
+	<span class="mailbox-attachment-icon has-img"><img src="{{imgsrc}}" alt="Attachment"></span>
+	<div class="mailbox-attachment-info">
+		<a href = "{{getLink}}" class = "mailbox-attachment-name">{{fileName}}</a>
+		<a href = "{{fullName}}" id ="fileDel" class = "btn btn-default btn-xs pull-right delbtn"><i class = "glyphicon glyphicon-remove"></i></a>
+	</div>
+</li>               
 </script>    
 
 <script>
@@ -146,8 +143,8 @@ $(".fileDrop").on("drop", function(event){
 	var files = event.originalEvent.dataTransfer.files;
 	
 	var file = files[0];
-
-	//console.log(file);
+	
+	console.dir(files);
 	
 	var formData = new FormData();
 	
@@ -161,9 +158,8 @@ $(".fileDrop").on("drop", function(event){
 		  contentType: false,
 		  type: 'POST',
 		  success: function(data){
-			  
+			  alert(data);
 			  var fileInfo = getFileInfo(data);
-			  
 			  var html = template(fileInfo);
 			  
 			  $(".uploadedList").append(html);

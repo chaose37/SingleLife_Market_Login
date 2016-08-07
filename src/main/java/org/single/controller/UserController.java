@@ -26,8 +26,7 @@ import org.springframework.web.util.WebUtils;
 @RequestMapping("/user")
 public class UserController {
 	
-	private static final Logger logger = 
-			LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
 	@Inject
 	private UserService service;
@@ -60,8 +59,7 @@ public class UserController {
 	
 	@CrossOrigin(origins="*", maxAge = 3600)
 	@RequestMapping(value="/loginPost", method=RequestMethod.POST)
-	@ResponseBody
-	public String loginPost(LoginDTO dto, HttpSession session, Model model) throws Exception{
+	public void loginPost(LoginDTO dto, HttpSession session, Model model) throws Exception{
 		
 		logger.warn("======================");
 		logger.warn(""+dto);
@@ -69,15 +67,14 @@ public class UserController {
 		
 		UserVO vo = service.login(dto);
 		logger.warn("" + vo);
-		if(vo == null)	
-			return null;
+		if(vo == null)
+			return;
 		
 		session.setAttribute("login", vo);
 		if(dto.isUseCookie()){
 			int amount = 60 * 60 * 24 * 7;
 			Date sessionLimit = new Date(System.currentTimeMillis()+(1000*amount));
 		}
-		return session.getId();
 	}	
 	
 	@RequestMapping(value="/logout", method=RequestMethod.GET)

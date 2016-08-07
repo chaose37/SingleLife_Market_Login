@@ -113,7 +113,7 @@ function getCookie(cookieName) {
                 <div class="box">
                     <div class="content registerBox" >
                         <div class="form">
-                            <form method="post" html="{:multipart=>true}" data-remote="true" action="/user/loginPostForm" accept-charset="UTF-8">
+                            <form method="post" html="{:multipart=>true}" data-remote="true" action="/user/loginPost" accept-charset="UTF-8">
                                 <input id="email" class="form-control" type="text" placeholder="Email" name="email">
                                 <input id="password" class="form-control" type="password" placeholder="Password" name="password">
                                 <input class="btn btn-default btn-register" type="submit" value="Login" name="commit">

@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html class="no-js">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Hydrogen &mdash; A free HTML5 Template by FREEHTML5.CO</title>
+    <title>Market</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Free HTML5 Template by FREEHTML5.CO"/>
     <meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive"/>
@@ -33,16 +34,29 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/style.css">
     <script src="${pageContext.request.contextPath}/resources/res/js/modernizr-2.6.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/res/js/respond.min.js"></script>
+    <style>
+	#searchDiv >*  
+	{
+		height: 30px;
+		vertical-align: middle;
+	}
+	body {
+		background-color: gray;
+	}  
+    
+    </style>
+    
+    
 </head>
 <body>
 <div id="fh5co-offcanvass">
-    <a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close">Menu <i class="icon-cross"></i> </a>
+    <a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close">Menu<i class="icon-cross"></i> </a>
     <h1 class="fh5co-logo"><a class="navbar-brand" href="list">Market</a></h1>
     <ul>
         <li class="active"><a href="list">Home</a></li>
-        <li><a href="register">Regist</a></li>
-        <li><a href="pricing.html">Pricing</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="http://localhost:9000/singleLifeWeb/src/index.html">SingleLife</a></li>
+        <c:if test="${empty login}"><li><a href="/user/login">login</a></li></c:if>
+        <c:if test="${not empty login}"><li><a href="/user/logout">logout</a></li></c:if>
     </ul>
     <h3 class="fh5co-lead">Connect with us</h3>
     <p class="fh5co-social-icons">
@@ -72,7 +86,7 @@
 				<div class="item">
                     <div class="animate-box">
                         <a href="${pageContext.request.contextPath}/board/readPage${pageMaker.makeSearch(pageMaker.cri.page)}&bno=${boardVO.bno}" class="fh5co-board-img" title="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, eos?">
-                            <img src="${pageContext.request.contextPath}/displayFile?fileName=${boardVO.files[0]}" onerror='this.src="/displayFile?fileName=/sl_logo2.gif"' />
+                            <img src="${pageContext.request.contextPath}/displayFile?fileName=${fn:substring(boardVO.files[0],0,12)}${fn:substring(boardVO.files[0],14,fn:length(boardVO.files[0]))}" onerror='this.src="/displayFile?fileName=/images.png"' style="width:250px; height: 200px;" />
                         </a>
                     </div>
                     <div class="fh5co-desc">${boardVO.content}</div>
@@ -82,6 +96,7 @@
         </div>
     </div>
 </div>
+<div id="searchDiv" style="text-align: center; line-height: 0px;">
 <select id="st" name="searchType" class="select2 req_place" data-select-search="true" placeholder="Option" style="text-align: center;">
 	<option value="n" <c:out value="${cri.searchType == null ? 'selected' : ''}" />>---</option>
 	<option value="t" <c:out value="${cri.searchType eq 't' ? 'selected' : ''}" />>Title</option>
@@ -91,9 +106,10 @@
 	<option value="cw" <c:out value="${cri.searchType eq 'cw' ? 'selected' : ''}" />>Content OR Writer</option>
 	<option value="tcw" <c:out value="${cri.searchType eq 'tcw' ? 'selected' : ''}" />>Title OR Content OR Writer</option>
 </select>
-
 <input type="text" class="input-small" style="height: 28px; width: 215px; margin-left: 0px;" name="keyword" id="keywordInput" value="${cri.keyword}">
-<button type="button" id="searchBtn" class="btn btn-primary btn-sm">search</button>
+<button type="button" id="searchBtn" class="btn-primary btn-sm">search</button>
+<button type="button" id="registBtn" style="margin-left:5px;" class="btn-success btn-sm">regist</button>
+</div>
 <div class="input-group input-group-sm" style="width: 150px;"></div>
 <!-- listPage 시작 -->
 <div class="text-center">
@@ -140,5 +156,25 @@
 <script src="${pageContext.request.contextPath}/resources/res/js/jquery.magnific-popup.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/res/js/salvattore.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/res/js/main.js"></script>
+<script>
+	var result = '${msg}';
+	if(result == 'success'){
+		alert("요청한 처리가 완료되었긔");
+	}
+	$(document).ready(function(){
+		$("#searchBtn").on("click", function(event){
+			self.location = 'list' 
+								+ '${pageMaker.makeQuery(1)}' 
+								+ '&searchType=' 
+								+ $("select option:selected").val() 
+								+ "&keyword=" 
+								+ $("#keywordInput").val(); 
+		});
+		
+		$("#registBtn").on("click", function(evt){
+			self.location = "register";
+		});
+	})
+</script>
 </body>
 </html>

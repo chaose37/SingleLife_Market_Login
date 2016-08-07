@@ -86,7 +86,7 @@
 	</insert>
 
 	<select id="read" parameterType="integer" resultType="boardVO">
-		select bno, viewcnt, title, writer, content, replycnt
+		select *
 		from sl_board
 		where bno=#{bno}
 	</select>
@@ -155,7 +155,7 @@
 	</insert>
 
 	<insert id="account" parameterType="userVO">
-		insert into sl_user(address, birthday, email, password, postcode, uuid, profilepath)
+		insert into sl_user(address, birthday, email, password, postcode, uuid, profilepath, users, developer)
 		values (#{address, jdbcType=VARCHAR}, #{birthday, jdbcType=VARCHAR},
 		#{email, jdbcType=VARCHAR}, #{password, jdbcType=VARCHAR},
 		#{postcode, jdbcType=VARCHAR},#{uuid, jdbcType=VARCHAR}, #{profilepath, jdbcType=VARCHAR}

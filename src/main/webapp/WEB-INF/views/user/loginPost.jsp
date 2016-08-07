@@ -17,5 +17,4 @@
 	self.location="/board/list";
 	</script>
 </body>
-
-.</html>
+</html>
