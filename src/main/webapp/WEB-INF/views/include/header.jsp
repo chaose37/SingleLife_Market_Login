@@ -47,8 +47,8 @@
 	    <ul>
 	        <li class="active"><a href="list">Home</a></li>
 	        <li><a href="http://localhost:9000/singleLife_web/src/index.html">SingleLife</a></li>
-	        <c:if test="${empty login}"><li><a href="/user/login">login</a></li></c:if>
-	        <c:if test="${not empty login}"><li><a href="/user/logout">logout</a></li></c:if>
+	        <c:if test="${empty login}"><li><a href="http://192.168.0.5:8000/user/login">login</a></li></c:if>
+	        <c:if test="${not empty login}"><li><a href="http://192.168.0.5:8000/user/logout">logout</a></li></c:if>
 	    </ul>
 	    <h3 class="fh5co-lead">Connect with us</h3>
 	    <p class="fh5co-social-icons">

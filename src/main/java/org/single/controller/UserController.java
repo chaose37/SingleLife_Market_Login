@@ -97,7 +97,7 @@ public class UserController {
 				service.keepLogin(vo.getEmail(), session.getId(), new Date());
 			}
 		}
-		return "redirect:http://localhost:8000/board/list";
+		return "redirect:http://192.168.0.5:8000/board/list";
 	}
 	
 	/**
