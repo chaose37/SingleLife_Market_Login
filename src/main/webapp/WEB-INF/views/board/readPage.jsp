@@ -6,42 +6,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <html>
 <head>
-<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Market</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Template by FREEHTML5.CO" />
-	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FREEHTML5.CO" />
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
-
-	<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/res/favicon.ico">
-	<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100,500' rel='stylesheet' type='text/css'>
-	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/animate.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/icomoon.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/magnific-popup.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/salvattore.css">
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/res/css/style.css">
-	<script src="${pageContext.request.contextPath}/resources/res/js/modernizr-2.6.2.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/res/js/respond.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/res/js/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/res/js/jquery.easing.1.3.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/res/js/bootstrap.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/res/js/jquery.waypoints.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/res/js/jquery.magnific-popup.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/res/js/salvattore.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/res/js/main.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/upload.js"></script>
-	
+<%@ include file="/WEB-INF/views/include/header.jsp"%>
+<script src="${pageContext.request.contextPath}/resources/res/js/jquery.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/jquery.easing.1.3.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/jquery.waypoints.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/jquery.magnific-popup.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/salvattore.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/res/js/main.js"></script>
 <style>
 .fileDrop {
   width: 80%;
@@ -77,35 +49,6 @@
 </style>
 </head>
 <body>
-<div id="fh5co-offcanvass">
-		<a href="#" class="fh5co-offcanvass-close js-fh5co-offcanvass-close">Menu <i class="icon-cross"></i> </a>
-		<h1 class="fh5co-logo"><a class="navbar-brand" href="list">Market</a></h1>
-		<ul>
-			<li><a href="list">Home</a></li>
-			<li class="active"><a href="readPage">About</a></li>
-			<li><a href="pricing.html">Pricing</a></li>
-			<li><a href="register">Contact</a></li>
-		</ul>
-		<h3 class="fh5co-lead">Connect with us</h3>
-		<p class="fh5co-social-icons">
-			<a href="#"><i class="icon-twitter"></i></a>
-			<a href="#"><i class="icon-facebook"></i></a>
-			<a href="#"><i class="icon-instagram"></i></a>
-			<a href="#"><i class="icon-dribbble"></i></a>
-			<a href="#"><i class="icon-youtube"></i></a>
-		</p>
-	</div>
-	<header id="fh5co-header" role="banner">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<a href="#" class="fh5co-menu-btn js-fh5co-menu-btn">Menu <i class="icon-menu"></i></a>
-					<a class="navbar-brand" href="list">Market</a>		
-				</div>
-			</div>
-		</div>
-	</header>
-	
 	<script type="text/javascript" src="/resources/js/upload.js"></script>
 	<form role="form" method="post">
 		<input type='hidden' name='bno' value="${boardVO.bno }">
@@ -115,8 +58,6 @@
 		<input type='hidden' name='keyword' value="${cri.keyword }">
 	</form>
 
-
-	
 	<div id="fh5co-main">
 		<div class="container">
 			<div class="row">
@@ -137,10 +78,9 @@
 		<img id = "popup_img" />
 	</div>
 	
-	
 	<div class = "box-footer">
 		<div>
-				<hr>
+			<hr />
 		</div>
 		<ul class="mailbox-attachments clearfix uploadedList"></ul>
 		<c:if test="${login.email == boardVO.writer}">
@@ -163,6 +103,7 @@
 						<input class="form-control" type="text" placeholder="내용" id="newReplyText">
 					</div>
 					<!-- box 바디 -->
+					<br />
 					<div class="box-footer">
 						<button type="submit" class="btn btn-primary" id="replyAddBtn">댓글등록</button>
 					</div>
@@ -200,9 +141,9 @@
 					</p>
 				</div>
 				<div class = "modal-footer">
-					<button type = "button" class = "btn btn-info" id = "replyModBtn">수정</button>
-					<button type = "button" class = "btn btn-danger" id = "replyDelBtn">삭제</button>
-					<button type = "button" class = "btn btn-default" data-dismiss = "modal">닫기</button>
+					<button type = "button" class = "btn-info" id = "replyModBtn">수정</button>
+					<button type = "button" class = "btn-danger" id = "replyDelBtn">삭제</button>
+					<button type = "button" class = "btn-default" data-dismiss = "modal">닫기</button>
 				</div>
 			</div>
 		</div>
@@ -210,6 +151,9 @@
 	
 	
 	<script>
+		function goLogin() {
+			location.href ="/user/login";
+		}
 		$(document).ready(function(){
 			
 			var formObj = $("form[role='form']");
@@ -459,5 +403,6 @@
 		}
 	
 	</script>
+	<%@ include file="/WEB-INF/views/include/footer.jsp"%>
 </body>
 </html>
