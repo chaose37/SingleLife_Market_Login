@@ -69,63 +69,73 @@
 					<p>조회수 : ${boardVO.viewcnt}</p>
 					<p>글쓴이 : ${boardVO.writer}</p>
 					<p>내   용 : ${boardVO.content}</p>
+					
+					<div class = "popup back" style = "display:none;"></div>
+					<div id = "popup_front" class = "popup front" style = "display:none;">
+						<img id = "popup_img" />
+					</div>
+					
+					<div class = "box-footer">
+						<div>
+							<hr />
+						</div>
+						<ul class="mailbox-attachments clearfix uploadedList"></ul>
+						<c:if test="${login.email == boardVO.writer}">
+							<button class = "btn btn-warning" id="modBoard" type = "submit">modify</button>
+							<button class = "btn btn-danger" id="delBoard" type = "submit">delete</button>
+						</c:if>
+						<button class = "btn btn-primary" id="listBoard" type = "submit">list</button>
+					</div>
 				</div>
         	</div>
-       </div>
-	</div>
-	<div class = "popup back" style = "display:none;"></div>
-	<div id = "popup_front" class = "popup front" style = "display:none;">
-		<img id = "popup_img" />
+    	</div>
 	</div>
 	
-	<div class = "box-footer">
-		<div>
-			<hr />
-		</div>
-		<ul class="mailbox-attachments clearfix uploadedList"></ul>
-		<c:if test="${login.email == boardVO.writer}">
-			<button class = "btn btn-warning" id="modBoard" type = "submit">modify</button>
-			<button class = "btn btn-danger" id="delBoard" type = "submit">delete</button>
-		</c:if>
-		<button class = "btn btn-primary" id="listBoard" type = "submit">list</button>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="box box-success">
-				<div class="box-header">
-					<h3 class ="box-title">댓글 추가</h3>
+	<!-- 댓글 추가  -->
+	<div class="container">
+		<div class="row">
+			<div  class="col-md-8 col-md-offset-2">
+				<div class="box box-success">
+					<div class="box-header">
+						<h3 class ="box-title">댓글 추가</h3>
+					</div>
+					<c:if test="${not empty login}">
+						<div class="box-body">
+							<label for="exampleInputEmail1">글쓴이</label>
+							<input class="form-control" type="text" value="${login.email}" readonly="readonly" placeholder="아이디" id="newReplyWriter">
+							<label for="exampleInputEmail1">댓글내용</label>
+							<input class="form-control" type="text" placeholder="내용" id="newReplyText">
+						</div>
+						<!-- box 바디 -->
+						<br />
+						<div class="box-footer">
+							<button type="submit" class="btn btn-primary" id="replyAddBtn">댓글등록</button>
+						</div>
+					</c:if>
+					
+					<c:if test="${empty login}">
+						<div class="box-body">
+						<div><a href="javascript:goLogin();">Login Please</a></div>
+						</div>
+					</c:if>	
+					
 				</div>
-				<c:if test="${not empty login}">
-					<div class="box-body">
-						<label for="exampleInputEmail1">글쓴이</label>
-						<input class="form-control" type="text" value="${login.email}" readonly="readonly" placeholder="아이디" id="newReplyWriter">
-						<label for="exampleInputEmail1">댓글내용</label>
-						<input class="form-control" type="text" placeholder="내용" id="newReplyText">
-					</div>
-					<!-- box 바디 -->
-					<br />
-					<div class="box-footer">
-						<button type="submit" class="btn btn-primary" id="replyAddBtn">댓글등록</button>
-					</div>
-				</c:if>
-				
-				<c:if test="${empty login}">
-					<div class="box-body">
-					<div><a href="javascript:goLogin();">Login Please</a></div>
-					</div>
-				</c:if>	
-				
 			</div>
 		</div>
 	</div>
+	<br>
 	<!-- 댓글 목록 -->
-	<ul class="timeline">
-		<li class="time-label" id="repliesDiv"><span class="bg-green">댓글 목록<small id='replycntSmall'>${boardVO.replycnt }</small></span></li>
-	</ul>
-	
-	<div class="text-center">
-		<ul id="pagination" class="pagination pagination-sm no-margin">
-		</ul>
+	<div class="container">
+		<div class="row">
+			<ul class="timeline col-md-8 col-md-offset-2">
+				<li class="time-label" id="repliesDiv"><span class="bg-green">댓글 목록<small id='replycntSmall'>${boardVO.replycnt }</small></span></li>
+			</ul>
+			
+			<div class="text-center">
+				<ul id="pagination" class="pagination pagination-sm no-margin">
+				</ul>
+			</div>
+		</div>
 	</div>
 	<!-- modal 추가 -->
 	<div id = "modifyModal" class = "modal modal-primary fade" role = "dialog">

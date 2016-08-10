@@ -12,9 +12,9 @@
 	                    <a href="#"><i class="icon-youtube"></i></a>
 	                </p>
 	                <p>
-	                    <small>&copy; Hydrogen Free HTML5 Template. All Rights Reserved. <br>Designed by:
-	                        <a href="http://freehtml5.co/" target="_blank">FREEHTML5.co</a> | Images by:
-	                        <a href="http://pexels.com" target="_blank">Pexels</a></small>
+	                    <small>&copy; Single Life <br>Designed by:
+	                        <a href="http://192.168.0.5:9000/singleLife_web/src/index.html" target="_blank">RollBack.co</a> | Images by:
+	                        <a href="http://192.168.0.5:9000/singleLife_web/src/index.html" target="_blank">BitCamp</a></small>
 	                </p>
 	            </div>
 	        </div>

@@ -47,12 +47,13 @@ public class GmailVerify {
             msg.setRecipient(Message.RecipientType.TO, to);
              
             // 이메일 제목
-            msg.setSubject("메일 전송 테스트 캬캬캬", "UTF-8");
+            msg.setSubject("Single Life 인증메일 발송 되었습니다.", "UTF-8");
              
             // 이메일 내용 
             // uuid
-            msg.setText("<div>[내용] uuid : "+uid+"</div>"
-            		  + "<div>링크 : <a href='http://localhost:9000/singleWeb/src/index.html?_ijt=aof8su2dqectdmf9o30tnv2g17'>uuid체크하러가기</a></div>", "UTF-8");
+            msg.setText("<div>[내용] 인증 KEY : "+uid+"</div>"
+            		  + "<div> Single Life 가입을 환영합니다.</div>"
+            		  + "<div> 링크 : <a href='http://localhost:9000/singleLife_web/src/index.html?_ijt=l3vbofhao2okq6vifoufcee8vq'>인증 KEY 체크 하러가기</a></div>", "UTF-8");
              
             // 이메일 헤더 
             msg.setHeader("content-Type", "text/html");

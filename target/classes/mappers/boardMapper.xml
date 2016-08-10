@@ -163,7 +163,7 @@
 	</insert>
 	
 	<select id="login" resultType="userVO">
-		select email, password, chk, profilepath
+		select email, password, chk, profilepath,users,developer
 		  from sl_user
 		 where email = #{email} and password = #{password}
 	</select>

@@ -4,8 +4,8 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="org.single.mapper.UserMapper">
-	<select id="login" resultType="UserVO">
-		select email, password, profilepath
+	<select id="login" resultType="userVO">
+		select email, password, chk, profilepath, users, developer
 		  from sl_user
 		 where email = #{email} and password = #{password}
 	</select>
